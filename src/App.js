@@ -1,26 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react'
 import './App.css';
+import LogIn from './components/Login'
+import MainContainer from './components/MainContainer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export default class App extends Component {
+  
+    state = {
+      loggedInUserId: null,
+      token: null
+    }
+
+    logOutClick = () => {
+      localStorage.removeItem("loggedInUserId")
+      localStorage.removeItem("token")
+      this.setState({
+        loggedInUserId: null,
+        token: null
+      })
+    }
+
+    loggedIn(){
+      return !!this.state.token
+    }
+
+    componentDidMount(){
+      this.setState({
+        token: localStorage.token,
+        loggedInUserId: localStorage.loggedInUserId
+      })
+    }
+
+    setToken = (token, loggedInUserId) => {
+      localStorage.token = token;
+      localStorage.loggedInUserId = loggedInUserId;
+
+      this.setState({
+        token: token,
+        loggedInUserId: loggedInUserId
+      })
+    }
+
+    render(){
+      return (<main>
+        <header>{ this.loggedIn() 
+                  ? <button onClick={ this.logOutClick }>Log out</button> 
+                  : "" 
+                }</header>
+        {
+          this.loggedIn()
+            ? <MainContainer loggedInUserId={ this.state.loggedInUserId } 
+                              token={ this.state.token } />
+            : <LogIn setToken={ this.setToken }  />
+        }
+      </main>);
+    }
 }
-
-export default App;
