@@ -27,7 +27,7 @@ const Post = (props) => {
         // </div>
 
         <div>
-            <img src={props.img}/>
+            <img src={props.img} height="300" width="300"/>
             <br></br>
             <p>{props.caption}</p>
         </div>

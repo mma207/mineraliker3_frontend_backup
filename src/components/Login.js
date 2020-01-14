@@ -13,6 +13,7 @@ export default class Login extends Component {
         users: [],
         avatar: "",
         bio: "",
+        name: "",
         image: {}
       }
     
@@ -158,6 +159,12 @@ export default class Login extends Component {
                         onChange={ this.onChange } 
                         name="bio" 
                         value={ this.state.bio } />
+                <label  htmlFor="sign_up_name">Name</label>
+                <input  id="sign_up_name" 
+                        type="name" 
+                        onChange={ this.onChange } 
+                        name="name" 
+                        value={ this.state.name } />
                 <input type="submit" />
               </form>
               <br></br>

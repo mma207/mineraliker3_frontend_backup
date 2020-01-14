@@ -22,7 +22,6 @@ export default class MainContainer extends Component {
 
     getPosts = () => {
             const { loggedInUserId, token } = this.props
-            console.log(loggedInUserId)
             fetch("http://localhost:3000/posts", {
               headers: {
                 "Authorization": token
@@ -41,10 +40,9 @@ export default class MainContainer extends Component {
               })
               .then(res => res.json())
               .then(user => {
-                // this.setState({
-                //   userPosts: user.posts
-                // })
-                console.log(user)
+                this.setState({
+                  userPosts: user.posts
+                })
               })
           }
     }
@@ -61,7 +59,7 @@ export default class MainContainer extends Component {
 
     handleCaption = (event) => {
         this.setState({
-            comment: event.target.value
+            caption: event.target.value
         })
     }
 
