@@ -15,15 +15,14 @@ export default class MainContainer extends Component {
     state = {
         image: {}, 
         img: "",
-        comment: "",
+        caption: "",
         posts: [],
-        userUpload: this.props.loggedInUserId,
         userPosts: []
     }
 
     getPosts = () => {
             const { loggedInUserId, token } = this.props
-        
+            console.log(loggedInUserId)
             fetch("http://localhost:3000/posts", {
               headers: {
                 "Authorization": token
@@ -35,16 +34,17 @@ export default class MainContainer extends Component {
               }))
         
             if (loggedInUserId) {
-              fetch(`http://localhost:3000/users/${ loggedInUserId }`, {
+              fetch(`http://localhost:3000/users/${loggedInUserId}`, {
                 headers: {
                   "Authorization": token
                 }
               })
               .then(res => res.json())
               .then(user => {
-                this.setState({
-                  userPosts: user.posts
-                })
+                // this.setState({
+                //   userPosts: user.posts
+                // })
+                console.log(user)
               })
           }
     }
@@ -70,7 +70,6 @@ export default class MainContainer extends Component {
         swal("Success", "", "success")
 
         let image = this.state.image
-        let profile_id = this.state.userUpload
         let uploadTask = storage.ref(`images/${image.name}`).put(image)
         uploadTask.on('state_changed', 
             (snapshot) => {
@@ -92,9 +91,9 @@ export default class MainContainer extends Component {
                         },
                         body: JSON.stringify({
                         img: this.state.img,
-                        comment: this.state.comment,
+                        caption: this.state.caption,
                         likes: 0, 
-                        profile_id: profile_id
+                        user_id: this.props.loggedInUserId
                         })
                     })
                     .then(r => r.json())

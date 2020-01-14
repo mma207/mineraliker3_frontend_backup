@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { storage } from '../firebase'
 
 
 export default class Login extends Component {
@@ -9,7 +10,10 @@ export default class Login extends Component {
         password: "",
         email: "",
         errors: [],
-        users: []
+        users: [],
+        avatar: "",
+        bio: "",
+        image: {}
       }
     
       onChange = event => {
@@ -17,6 +21,35 @@ export default class Login extends Component {
           [event.target.name]: event.target.value
         })
       }
+
+      handleAvatarChange = (event) => {
+        this.setState({
+            image: event.target.files[0]
+        })
+    }
+
+      handleAvatarUpload = (event) => {
+          event.preventDefault()
+
+          let image = this.state.image
+          let uploadTask = storage.ref(`images/${image.name}`).put(image)
+          uploadTask.on('state_changed', 
+              (snapshot) => {
+
+              },
+              (error) => {
+
+              },
+              () => {
+                  storage.ref('images').child(image.name).getDownloadURL().then(url => {
+                      this.setState({
+                          avatar: url
+                      })
+                    })
+              }
+          )
+        }
+
     
       logInSubmitted = (event) => {
         event.preventDefault()
@@ -32,7 +65,7 @@ export default class Login extends Component {
           })
         }).then(res => res.json())
           .then(data => {
-              this.props.setToken(data.token, data.user_id)
+              this.props.setToken(data.token, data.user.id)
           })
       }
 
@@ -48,7 +81,7 @@ export default class Login extends Component {
         
       signUpSubmitted = (event) => {
         event.preventDefault()
-
+      
         fetch(`http://localhost:3000/users`, {
           method:'POST',
           headers: { 
@@ -58,7 +91,9 @@ export default class Login extends Component {
           body: JSON.stringify({
           username:this.state.username,
           password: this.state.password,
-          email: this.state.email
+          email: this.state.email, 
+          avatar: this.state.avatar,
+          bio: this.state.bio
           })
         })
         .then(r => r.json())
@@ -94,7 +129,6 @@ export default class Login extends Component {
                         value={ this.state.password } />
                 <input type="submit" />
               </form>
-              {/* add a link to profile form component */}
             </>
             : <>
               <h2>Sign up</h2>
@@ -112,13 +146,25 @@ export default class Login extends Component {
                         onChange={ this.onChange } 
                         name="password" 
                         value={ this.state.password } />
-                        <label  htmlFor="sign_up_password">Email</label>
+                <label  htmlFor="sign_up_password">Email</label>
                 <input  id="sign_up_email" 
                         type="email" 
                         onChange={ this.onChange } 
                         name="email" 
                         value={ this.state.email } />
+                <label  htmlFor="sign_up_bio">Bio</label>
+                <input  id="sign_up_bio" 
+                        type="bio" 
+                        onChange={ this.onChange } 
+                        name="bio" 
+                        value={ this.state.bio } />
                 <input type="submit" />
+              </form>
+              <br></br>
+              <form onSubmit={this.handleAvatarUpload}>
+                    <label htmlFor="sign_up_avatar">Avatar</label>
+                    <input id="sign_up_avatar" type="file" accept="image/*" capture="camera" onChange={this.handleAvatarChange}/>
+                    <button>Upload</button>
               </form>
             </>
           }
