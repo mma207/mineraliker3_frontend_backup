@@ -52,7 +52,8 @@ export default class Login extends Component {
         fetch(`http://localhost:3000/users`, {
           method:'POST',
           headers: { 
-            Authorization: this.props.setToken
+            "Accept": "application/json",
+            "Content-Type": "application/json"
           },
           body: JSON.stringify({
           username:this.state.username,
@@ -62,15 +63,13 @@ export default class Login extends Component {
         })
         .then(r => r.json())
         .then(user=> {
-            console.log(user)
-            localStorage.setItem("token", user.jwt)
-            this.logInSubmitted(user.user)
+            localStorage.setItem("token", user.token)
+            // go to make profile 
         })
-        
-
       }
 
       render(){
+          console.log(this.props)
         return <section>
           <ul className="errors">
             {
@@ -97,6 +96,7 @@ export default class Login extends Component {
                         value={ this.state.password } />
                 <input type="submit" />
               </form>
+              {/* add a link to profile form component */}
             </>
             : <>
               <h2>Sign up</h2>

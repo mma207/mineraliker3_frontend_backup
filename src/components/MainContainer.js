@@ -18,7 +18,7 @@ export default class MainContainer extends Component {
         img: "",
         comment: "",
         posts: [],
-        Uploadprofile_id: 4,
+        // userUpload: 
         userPosts: []
     }
 
@@ -69,7 +69,7 @@ export default class MainContainer extends Component {
         swal("Success", "", "success")
 
         let image = this.state.image
-        let profile_id = this.state.Uploadprofile_id
+        let profile_id = this.state.userUpload
         let uploadTask = storage.ref(`images/${image.name}`).put(image)
         uploadTask.on('state_changed', 
             (snapshot) => {

@@ -20,7 +20,7 @@ export default class App extends Component {
       })
     }
 
-    loggedIn(){
+    loggedIn = () => {
       return !!this.state.token
     }
 
