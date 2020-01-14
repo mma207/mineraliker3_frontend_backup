@@ -18,7 +18,7 @@ export default class MainContainer extends Component {
         img: "",
         comment: "",
         posts: [],
-        // userUpload: 
+        userUpload: this.props.loggedInUserId,
         userPosts: []
     }
 
