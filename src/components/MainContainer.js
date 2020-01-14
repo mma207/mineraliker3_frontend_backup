@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Nav from './Nav'
 import {BrowserRouter, Route} from 'react-router-dom'
 import Search from './Search'
-import Home from './Home'
 import Upload from './Upload'
 import Profile from './Profile'
 import Notification from './Notification'
@@ -42,9 +41,11 @@ export default class MainContainer extends Component {
                 }
               })
               .then(res => res.json())
-              .then(user => console.log(user) || this.setState({
-                userPosts: user.posts
-              }))
+              .then(user => {
+                this.setState({
+                  userPosts: user.posts
+                })
+              })
           }
     }
 
@@ -146,12 +147,11 @@ export default class MainContainer extends Component {
             <BrowserRouter>
                 <div>
                   <Nav />
-                  <Route exact path='/' component={Home} /> 
-                  <Route exact path='/feed' render={(props) => (<Feed posts={this.state.posts} />)} /> 
+                  <Route exact path='/' render={(props) => (<Feed posts={this.state.posts} />)} /> 
                   <Route path='/search' component={Search} /> 
                   <Route path='/upload' render={(props) => (<Upload handleChange={this.handleChange} handleCaption={this.handleCaption} handleUpload={this.handleUpload}/>)} /> 
                   <Route path='/notification' component={Notification}/>
-                  <Route path='/profile' render={(props) => (<Profile userPosts={this.state.userPosts} handleDeletePost={this.handleDeletePost} handleChangeBio={this.handleChangeBio} handleSubmitBio={this.handleSubmitBio} bio={this.state.bio}/>)}/>
+                  <Route path='/profile' render={(props) => (<Profile userPosts={this.state.userPosts} handleDeletePost={this.handleDeletePost} />)}/>
                   <Route path='/message' component={Message}/>
                 </div>
             </BrowserRouter>

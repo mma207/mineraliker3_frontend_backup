@@ -7,8 +7,7 @@ export default class Nav extends Component {
                 <div>
                     <ul>
                         <li>Mineraliker3</li>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/feed">Feed</a></li>
+                        <li><a href="/">Feed</a></li>
                         <li><a href="/search">Search</a></li>
                         <li><a href="/upload">Upload</a></li>
                         <li><a href="/notification">Notification Center</a></li>

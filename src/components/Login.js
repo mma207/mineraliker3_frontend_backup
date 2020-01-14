@@ -64,7 +64,6 @@ export default class Login extends Component {
         .then(r => r.json())
         .then(user=> {
             localStorage.setItem("token", user.token)
-            // go to make profile 
         })
       }
 
