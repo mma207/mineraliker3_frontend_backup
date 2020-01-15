@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { storage } from '../firebase'
+import './login.css'
 
 
 export default class Login extends Component {
@@ -105,7 +106,7 @@ export default class Login extends Component {
 
       render(){
         return <section>
-          <ul className="errors">
+          <ul classNameName="errors">
             {
               this.state.errors.map(error => <li>{ error }</li>)
             }
@@ -113,70 +114,82 @@ export default class Login extends Component {
           {
             this.state.logIn 
             ? <>
-              <h2>Log In</h2>
-              <button onClick={ () => this.setState({ logIn: false }) }>I need to register!!!</button>
-              <form onSubmit={ this.logInSubmitted }>
-                <label  htmlFor="log_in_username">Username</label>
-                <input  id="log_in_username" 
-                        type="text" 
-                        onChange={ this.onChange /* for controlled form input status */ } 
-                        name="username" 
-                        value={ this.state.username /* for controlled form input status */ } />
-                <label  htmlFor="log_in_password">Password</label>
-                <input  id="log_in_password" 
-                        type="password" 
-                        onChange={ this.onChange } 
-                        name="password" 
-                        value={ this.state.password } />
-                <input type="submit" />
-              </form>
+              <div id="wrapper">
+                    <div className="container">
+                      <div className="phone-app-demo"></div>
+                      <div className="form-data">
+                        <form onSubmit={ this.logInSubmitted }>
+                          <div className="logo">
+                            <h1>Mineraliker3</h1>
+                            {/* <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet"></link> */}
+                          </div>
+                          <input type="text" placeholder="Username" id="log_in_username" onChange={ this.onChange } name="username" />
+                          <input placeholder="Password" id="log_in_password" onChange={ this.onChange } type="password" name="password"/>
+                          <button className="form-btn" type="submit">Log in</button>
+                          <span className="has-separator">Or</span>
+                        </form>
+                        <div className="sign-up">
+                          Don't an account? <button onClick={ () => this.setState({ logIn: false })}> Sign up</button>
+                        </div>
+                        <div className="get-the-app">
+                          <span>Get the app</span>
+                            <div className="badge">
+                              <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/e9cd846dc748.png" alt="android App"/>
+                              <br></br>
+                              <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/180ae7a0bcf7.png" alt="ios app"/>
+                            </div>
+                      </div>
+                      </div>
+                    </div>
+
+                    <footer>
+                      <div className="container">
+                        <nav className="footer-nav">
+                          <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Support</a></li>
+                            <li><a href="#">Jobs</a></li>
+                            <li><a href="#">Privacy</a></li>
+                            <li><a href="#">Terms</a></li>
+                          </ul>
+                        </nav>
+                        <div className="copyright-notice">
+                          &copy; 2020 Mineraliker3
+                        </div>
+                      </div>
+                    </footer>
+                  </div>
             </>
             : <>
-              <h2>Sign up</h2>
-              <button onClick={ () => this.setState({ logIn: true }) }>I already signed up!!!</button>
-              <form onSubmit={ this.signUpSubmitted }>
-                <label  htmlFor="sign_up_username">Username</label>
-                <input  id="sign_up_username" 
-                        type="text" 
-                        onChange={ this.onChange } 
-                        name="username" 
-                        value={ this.state.username } />
-                <label  htmlFor="sign_up_password">Password</label>
-                <input  id="sign_up_password" 
-                        type="password" 
-                        onChange={ this.onChange } 
-                        name="password" 
-                        value={ this.state.password } />
-                <label  htmlFor="sign_up_password">Email</label>
-                <input  id="sign_up_email" 
-                        type="email" 
-                        onChange={ this.onChange } 
-                        name="email" 
-                        value={ this.state.email } />
-                <label  htmlFor="sign_up_bio">Bio</label>
-                <input  id="sign_up_bio" 
-                        type="bio" 
-                        onChange={ this.onChange } 
-                        name="bio" 
-                        value={ this.state.bio } />
-                <label  htmlFor="sign_up_name">Name</label>
-                <input  id="sign_up_name" 
-                        type="name" 
-                        onChange={ this.onChange } 
-                        name="name" 
-                        value={ this.state.name } />
-                <input type="submit" />
-              </form>
-              <br></br>
-              <form onSubmit={this.handleAvatarUpload}>
-                    <label htmlFor="sign_up_avatar">Avatar</label>
-                    <input id="sign_up_avatar" type="file" accept="image/*" capture="camera" onChange={this.handleAvatarChange}/>
-                    <button>Upload</button>
-              </form>
+              <div className="signup-container">
+                  <strong><p className="greeting">Sign up to see photos and videos from your friends.</p></strong>
+                  <form onSubmit={ this.signUpSubmitted } className="container__form">
+                    <input className="input" type="email" placeholder="Email" id="sign_up_email" onChange={ this.onChange } name="email"/>
+                    <input className="input" type="name" placeholder="Name" id="sign_up_name" onChange={ this.onChange } name="name"/>
+                    <input className="input" type="text" placeholder="Username" id="sign_up_username" onChange={ this.onChange } name="username"/>
+                    <input className="input" type="password" placeholder="Password" id="sign_up_password" onChange={ this.onChange } name="password"/>
+                    <input className="input" type="text" placeholder="Bio" id="sign_up_bio" onChange={ this.onChange } name="bio"/>
+                    <input type="submit" className="button"/>
+                  </form>
+                    <br></br>
+                    <form onSubmit={this.handleAvatarUpload}>
+                        <label htmlFor="sign_up_avatar">Avatar</label>
+                        <input id="sign_up_avatar" type="file" accept="image/*" capture="camera" onChange={this.handleAvatarChange}/>
+                        <button>Upload</button>
+                    </form>
+                  <p className="container__terms">By signin up, you agree to our <br></br> <strong>Terms & Privacy Policy.</strong></p>
+              </div>
+
+              <div className="account">
+                <p>Have an account? <button className="account-button" onClick={ () => this.setState({ logIn: true }) }>Log in</button></p>
+              </div> 
             </>
           }
         </section>
     }
     
 }
+    
+
+ 
     

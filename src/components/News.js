@@ -3,7 +3,7 @@ import React from 'react';
 const News = (props) => {
     
     return (
-
+        <div align="center">
         <div class="ui card">
             <a class="image" href={props.link} target="_blank">
                 <img src={props.url}/>
@@ -18,7 +18,7 @@ const News = (props) => {
                 </div>
             </div>
         </div>
-        
+        </div>
     )
 }
 
