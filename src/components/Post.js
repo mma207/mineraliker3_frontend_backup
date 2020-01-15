@@ -8,7 +8,7 @@ const Post = (props) => {
                 <img class="ui avatar image" src="/images/avatar/large/elliot.jpg"/> User
             </div>
             <div class="image">
-                <img src={props.img}/>
+                <img src={props.img} onClick={() => props.handleLike(props.post)}/>
                 <p>{props.caption}</p>
             </div>
             <div class="content">

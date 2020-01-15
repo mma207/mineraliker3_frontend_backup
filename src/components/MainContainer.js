@@ -150,12 +150,35 @@ export default class MainContainer extends Component {
       })
     }
 
+    handleLike = (post) => {
+      let likes = post.likes + 1
+      fetch(`http://localhost:3000/posts/${post.id}`, {
+        method:'PATCH',
+        headers: { 
+          'content-type': 'application/json',
+          'accept': 'application/json'
+        },
+        body: JSON.stringify({
+        likes: likes 
+        })
+      })
+        .then(r => r.json())
+        .then(updateLike => {
+          let newPostArray = this.state.posts.map(obj => {
+            return obj.id === post.id ? updateLike : obj
+          })
+          this.setState({
+            posts: newPostArray
+          })
+        })
+    }
+
     render() {
         return (
             <BrowserRouter>
                 <div>
                   <Nav />
-                  <Route exact path='/' render={(props) => (<Feed posts={this.state.posts} />)} /> 
+                  <Route exact path='/' render={(props) => (<Feed handleLike={this.handleLike} posts={this.state.posts} />)} /> 
                   <Route path='/search' component={Search} /> 
                   <Route path='/upload' render={(props) => (<Upload handleChange={this.handleChange} handleCaption={this.handleCaption} handleUpload={this.handleUpload}/>)} /> 
                   <Route path='/notification' component={Notification}/>
