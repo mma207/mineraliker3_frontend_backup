@@ -5,7 +5,7 @@ const ProfilePost = (props) => {
         <div onClick={() => {props.handleDeletePost(props.post)}}>
             <img src={props.img} height="300" width="300"/>
             <p>{props.caption}</p>
-            <p>{props.likes}</p>
+            <button>{props.likes} ♥️</button>
         </div>
     );
 }

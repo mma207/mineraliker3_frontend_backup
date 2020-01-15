@@ -17,7 +17,10 @@ export default class MainContainer extends Component {
         img: "",
         caption: "",
         posts: [],
-        userPosts: []
+        userPosts: [],
+        name: "",
+        avatar: "",
+        bio: ""
     }
 
     getPosts = () => {
@@ -41,7 +44,10 @@ export default class MainContainer extends Component {
               .then(res => res.json())
               .then(user => {
                 this.setState({
-                  userPosts: user.posts
+                  userPosts: user.posts,
+                  avatar: user.avatar,
+                  bio: user.bio,
+                  name: user.name
                 })
               })
           }
@@ -121,16 +127,17 @@ export default class MainContainer extends Component {
               swal("This post has been deleted from your profile", {
                 icon: "success",
               })
+
         fetch(`http://localhost:3000/posts/${post.id}`, {
           method:'DELETE'
         })
           .then(r => r.json())
           .then(post => {
-            let safePosts = this.state.posts.filter(obj => {
+            let safePosts = this.state.userPosts.filter(obj => {
                 return post.id !== obj.id 
             })
             this.setState({
-                posts: safePosts
+                userPosts: safePosts
             })
           })
         } else {
@@ -148,7 +155,7 @@ export default class MainContainer extends Component {
                   <Route path='/search' component={Search} /> 
                   <Route path='/upload' render={(props) => (<Upload handleChange={this.handleChange} handleCaption={this.handleCaption} handleUpload={this.handleUpload}/>)} /> 
                   <Route path='/notification' component={Notification}/>
-                  <Route path='/profile' render={(props) => (<Profile userPosts={this.state.userPosts} handleDeletePost={this.handleDeletePost} />)}/>
+                  <Route path='/profile' render={(props) => (<Profile name={this.state.name} bio={this.state.bio} avatar={this.state.avatar} userPosts={this.state.userPosts} handleDeletePost={this.handleDeletePost} />)}/>
                   <Route path='/message' component={Message}/>
                 </div>
             </BrowserRouter>
