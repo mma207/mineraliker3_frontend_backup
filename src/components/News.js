@@ -3,16 +3,21 @@ import React from 'react';
 const News = (props) => {
     
     return (
-        
-        <div>
-            <img src={props.url} alt="Image Not Available"/>
-            <h2>{props.title}</h2>
-            <p>Written By: {props.author}</p>
-            <p>{props.description}</p>
-            <a href={props.link}>read more</a>
+
+        <div class="ui card">
+            <a class="image" href={props.link} target="_blank">
+                <img src={props.url}/>
+            </a>
+            <div class="content">
+                <div class="header">
+                    <h2>{props.title}</h2>
+                    <p>Written By: {props.author}</p>
+                </div>
+                <div class="meta">
+                    <p>{props.description}</p>
+                </div>
+            </div>
         </div>
-
-
         
     )
 }

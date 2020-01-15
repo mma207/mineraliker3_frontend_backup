@@ -136,8 +136,12 @@ export default class MainContainer extends Component {
             let safePosts = this.state.userPosts.filter(obj => {
                 return post.id !== obj.id 
             })
+            let allSafePosts = this.state.posts.filter(obj => {
+              return post.id !== obj.id 
+            })
             this.setState({
-                userPosts: safePosts
+                userPosts: safePosts,
+                posts: allSafePosts
             })
           })
         } else {

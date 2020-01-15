@@ -9,8 +9,6 @@ export default class Feed extends Component {
         )
     }
 
-    // add like feature 
-
     render() {
         return (
             <div>

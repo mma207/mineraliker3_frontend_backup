@@ -2,13 +2,19 @@ import React from 'react';
 
 const ProfilePost = (props) => {
     return (
-        <div onClick={() => {props.handleDeletePost(props.post)}}>
-            <img src={props.img} height="300" width="300"/>
-            <p>{props.caption}</p>
-            <button>{props.likes} ♥️</button>
+        <div class="ui three stackable cards">
+            <div class="card" onClick={() => {props.handleDeletePost(props.post)}}>
+                <div class="image">
+                    <img src={props.img} />
+                    <p>{props.caption}</p>
+                    <p>{props.likes} ♥️</p>
+                </div>
+            </div>
         </div>
     );
 }
 
 export default ProfilePost;
+
+
 
