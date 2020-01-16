@@ -46,26 +46,27 @@ export default class Post extends Component {
 	render() {
 		return (
 			<div align="center">
-				<div class="ui card" align="left">
-					<div class="content">
-						<img class="ui avatar image" src="/images/avatar/large/elliot.jpg" /> User
+				<div className="ui card" align="left">
+					<div className="content">
+						<img className="ui avatar image" src="/images/wireframe/square-image.png"/> 
+                        <span>Username</span>
 					</div>
-					<div class="image">
+					<div className="image">
 						<img src={this.props.img} onClick={() => this.props.handleLike(this.props.post)} />
 						<p>{this.props.caption}</p>
 					</div>
-					<div class="content">
-						<span class="right floated">
+					<div className="content">
+						<span className="right floated">
 							<button>
-								<i class="heart outline like icon" />
+								<i className="heart outline like icon" />
 							</button>
 							{this.props.likes}
 						</span>
-						<i class="comment icon" />
+						<i className="comment icon" />
                             {this.state.comments.length} comments
 					</div>
-					<div class="extra content">
-						<div class="ui large transparent input">
+					<div className="extra content">
+						<div className="ui large transparent input">
                             <form onSubmit={this.handleSubmitComment}>
 							    <input type="text" placeholder="Add Comment..." onChange={this.handleComment}/>
                             </form>

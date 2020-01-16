@@ -106,7 +106,7 @@ export default class Login extends Component {
 
       render(){
         return <section>
-          <ul classNameName="errors">
+          <ul className="errors">
             {
               this.state.errors.map(error => <li>{ error }</li>)
             }
@@ -162,6 +162,7 @@ export default class Login extends Component {
             </>
             : <>
               <div className="signup-container">
+                <h1>Mineraliker3</h1>
                   <strong><p className="greeting">Sign up to see photos and videos from your friends.</p></strong>
                   <form onSubmit={ this.signUpSubmitted } className="container__form">
                     <input className="input" type="email" placeholder="Email" id="sign_up_email" onChange={ this.onChange } name="email"/>
