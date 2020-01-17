@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { storage } from '../firebase'
 import './login.css'
+import swal from 'sweetalert'
 
 
 export default class Login extends Component {
@@ -83,6 +84,7 @@ export default class Login extends Component {
         
       signUpSubmitted = (event) => {
         event.preventDefault()
+        swal("Success", "Sign up complete", "success")
       
         fetch(`http://localhost:3000/users`, {
           method:'POST',
@@ -102,6 +104,7 @@ export default class Login extends Component {
         .then(user=> {
             localStorage.setItem("token", user.token)
         })
+        event.target.reset()
       }
 
       render(){
@@ -146,11 +149,11 @@ export default class Login extends Component {
                       <div className="container">
                         <nav className="footer-nav">
                           <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Support</a></li>
-                            <li><a href="#">Jobs</a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Terms</a></li>
+                            <li><a className="a" href="#">About Us</a></li>
+                            <li><a className="a" href="#">Support</a></li>
+                            <li><a className="a" href="#">Jobs</a></li>
+                            <li><a className="a" href="#">Privacy</a></li>
+                            <li><a className="a" href="#">Terms</a></li>
                           </ul>
                         </nav>
                         <div className="copyright-notice">

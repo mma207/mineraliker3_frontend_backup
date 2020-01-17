@@ -9,6 +9,7 @@ import Message from './Message'
 import { storage } from '../firebase'
 import swal from 'sweetalert'
 import Feed from './Feed'
+import Header from './Header'
 
 export default class MainContainer extends Component {
 
@@ -20,7 +21,8 @@ export default class MainContainer extends Component {
         userPosts: [],
         name: "",
         avatar: "",
-        bio: ""
+        bio: "",
+        likes: []
     }
 
     getPosts = () => {
@@ -55,6 +57,7 @@ export default class MainContainer extends Component {
 
     componentDidMount(){
         this.getPosts()
+        // this.getLikes()
     }
 
     handleChange = (event) => {
@@ -150,34 +153,85 @@ export default class MainContainer extends Component {
       })
     }
 
-    handleLike = (post) => {
-      let likes = post.likes + 1
-      fetch(`http://localhost:3000/posts/${post.id}`, {
-        method:'PATCH',
-        headers: { 
-          'content-type': 'application/json',
-          'accept': 'application/json'
-        },
-        body: JSON.stringify({
-        likes: likes 
-        })
-      })
-        .then(r => r.json())
-        .then(updateLike => {
-          let newPostArray = this.state.posts.map(obj => {
-            return obj.id === post.id ? updateLike : obj
-          })
-          this.setState({
-            posts: newPostArray
-          })
-        })
-    }
+    // getLikes = () => {
+    //   fetch(`http://localhost:3000/users/${this.props.loggedInUserId}`)
+    //     .then(r => r.json())
+    //     .then(user => {
+    //       this.setState({
+    //         likes: user.likes
+    //       })
+    //     })
+    // }
+
+    // handleLike = (post) => {
+    //   let userLikes = [...this.state.likes]
+    //   userLikes.filter(like => {
+    //     return like.post_id === post.id ? like.isClicked : !like.isClicked
+    //   })
+
+    // }
+
+    // handlePostLike = (post) => {
+    //   fetch(`http://localhost:3000/likes`, {
+    //     method:'POST',
+    //     headers: { 
+    //       'content-type': 'application/json',
+    //       'accept': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //     user_id: this.props.loggedInUserId,
+    //     post_id: post.id,
+    //     isClicked: true 
+    //     })
+    //   })
+    //   .then(r => r.json())
+    //   .then(newLike => {
+    //     let likes = [...this.state.likes, newLike]
+    //     this.setState({
+    //       likes: likes 
+    //     })
+    //   })
+    // }
+ 
+    // handleLikeCounter = (post) => {
+    //   let postLikes = post.likes + 1
+    //     fetch(`http://localhost:3000/posts/${post.id}`, {
+    //       method:'PATCH',
+    //       headers: { 
+    //         'content-type': 'application/json',
+    //         'accept': 'application/json'
+    //       },
+    //       body: JSON.stringify({
+    //       likes: postLikes 
+    //       })
+    //     })
+    //     .then(r => r.json())
+    //     .then(updateLike => {
+    //       let newPostArray = this.state.posts.map(obj => {
+    //         return obj.id === post.id ? updateLike : obj
+    //       })
+    //       this.setState({
+    //         posts: newPostArray
+    //       })
+    //     })
+    // }
+
+    // handleCompleteLike = (post) => {
+    //   // if (!this.state.currentLike.isClicked){
+    //   this.handleLike(post)
+    //   // this.handleLikeCounter(post)
+    //   // } else {
+    //   //   return 
+    //   // }
+    // }
 
     render() {
         return (
             <BrowserRouter>
                 <div>
-                  <Route exact path='/' render={(props) => (<Feed handleLike={this.handleLike} posts={this.state.posts} />)} /> 
+                  <Header />
+                  <br></br>
+                  <Route exact path='/' render={(props) => (<Feed handleCompleteLike={this.handleCompleteLike} posts={this.state.posts} />)} /> 
                   <Route path='/search' component={Search} /> 
                   <Route path='/upload' render={(props) => (<Upload handleChange={this.handleChange} handleCaption={this.handleCaption} handleUpload={this.handleUpload}/>)} /> 
                   <Route path='/notification' component={Notification}/>

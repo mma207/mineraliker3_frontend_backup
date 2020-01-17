@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import Comment from './Comment'
 
 export default class ProfilePost extends Component {
 
     renderComments = () => {
         return this.props.comments.map(comment => 
-            comment.text
+            <Comment comment={comment}/>
         )
     }
 

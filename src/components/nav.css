@@ -1,24 +1,27 @@
-footer
-{
-	padding: 5rem 0;
+.container {
+  width: 100%;
+  background-color: white;
+  overflow: auto;
+  bottom: 0;
+  position: fixed; 
 }
 
-footer .container
-{
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-    margin-top: 0;
-}
+.container a {
+	float: left;
+	padding-top: 10px;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-bottom: 10px;
+	color: white;
+	text-decoration: none;
+	font-size: 17px;
+  }
 
-.footer-nav ul
-{
-	display: flex;
-	flex-wrap: wrap;
-    list-style: none;
-}
+  .container i {
+	  color: green
+  }
 
-.footer-nav ul li
-{
-    margin-right: 1.2rem;
-}
+  .header {
+	top: 30px;
+  }
+  

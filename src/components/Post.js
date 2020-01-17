@@ -57,8 +57,8 @@ export default class Post extends Component {
 					</div>
 					<div className="content">
 						<span className="right floated">
-							<button>
-								<i className="heart outline like icon" onClick={() => this.props.handleLike(this.props.post)}/>
+							<button >
+								<i className="heart outline like icon" onClick={() => this.props.handleCompleteLike(this.props.post)} />
 							</button>
 							{this.props.likes}
 						</span>
