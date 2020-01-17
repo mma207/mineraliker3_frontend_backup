@@ -177,13 +177,13 @@ export default class MainContainer extends Component {
         return (
             <BrowserRouter>
                 <div>
-                  <Nav />
                   <Route exact path='/' render={(props) => (<Feed handleLike={this.handleLike} posts={this.state.posts} />)} /> 
                   <Route path='/search' component={Search} /> 
                   <Route path='/upload' render={(props) => (<Upload handleChange={this.handleChange} handleCaption={this.handleCaption} handleUpload={this.handleUpload}/>)} /> 
                   <Route path='/notification' component={Notification}/>
                   <Route path='/profile' render={(props) => (<Profile name={this.state.name} bio={this.state.bio} avatar={this.state.avatar} userPosts={this.state.userPosts} handleDeletePost={this.handleDeletePost} />)}/>
                   <Route path='/message' component={Message}/>
+                  <Nav />
                 </div>
             </BrowserRouter>
         )

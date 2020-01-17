@@ -123,8 +123,8 @@ export default class Login extends Component {
                             <h1>Mineraliker3</h1>
                             {/* <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet"></link> */}
                           </div>
-                          <input type="text" placeholder="Username" id="log_in_username" onChange={ this.onChange } name="username" />
-                          <input placeholder="Password" id="log_in_password" onChange={ this.onChange } type="password" name="password"/>
+                          <input type="text" placeholder="Username" value={this.state.username} id="log_in_username" onChange={ this.onChange } name="username" />
+                          <input placeholder="Password" value={this.state.password} id="log_in_password" onChange={ this.onChange } type="password" name="password"/>
                           <button className="form-btn" type="submit">Log in</button>
                           <span className="has-separator">Or</span>
                         </form>
@@ -136,7 +136,7 @@ export default class Login extends Component {
                             <div className="badge">
                               <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/e9cd846dc748.png" alt="android App"/>
                               <br></br>
-                              <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/180ae7a0bcf7.png" alt="ios app"/>
+                              <img height="80" width="80" src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/180ae7a0bcf7.png" alt="ios app"/>
                             </div>
                       </div>
                       </div>

@@ -18,6 +18,7 @@ const News = (props) => {
                 </div>
             </div>
         </div>
+        <br></br>
         </div>
     )
 }

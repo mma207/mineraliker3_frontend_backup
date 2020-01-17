@@ -52,13 +52,13 @@ export default class Post extends Component {
                         <span>Username</span>
 					</div>
 					<div className="image">
-						<img src={this.props.img} onClick={() => this.props.handleLike(this.props.post)} />
+						<img src={this.props.img} />
 						<p>{this.props.caption}</p>
 					</div>
 					<div className="content">
 						<span className="right floated">
 							<button>
-								<i className="heart outline like icon" />
+								<i className="heart outline like icon" onClick={() => this.props.handleLike(this.props.post)}/>
 							</button>
 							{this.props.likes}
 						</span>

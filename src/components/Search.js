@@ -24,7 +24,6 @@ export default class Search extends Component {
                   news: newsArray.articles
               })
           })
-          console.log(this.state.news)
           event.target.reset()
     }
 

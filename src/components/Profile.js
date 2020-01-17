@@ -5,7 +5,7 @@ export default class Profile extends Component {
 
     renderUserPosts = () => {
         return this.props.userPosts.map(post => 
-            <ProfilePost post={post} img={post.img} caption={post.caption} likes={post.likes} handleDeletePost={this.props.handleDeletePost}/> 
+            <ProfilePost post={post} img={post.img} caption={post.caption} likes={post.likes} handleDeletePost={this.props.handleDeletePost} comments={post.comments}/> 
         )
     }
 
