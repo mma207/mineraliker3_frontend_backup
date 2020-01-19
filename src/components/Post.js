@@ -46,7 +46,7 @@ export default class Post extends Component {
 	render() {
 		return (
 			<div align="center">
-				<div className="ui card" align="left">
+				<div className="ui card" align="left" >
 					<div className="content">
 						<img className="ui avatar image" src="/images/wireframe/square-image.png"/> 
                         <span>Username</span>
@@ -58,7 +58,7 @@ export default class Post extends Component {
 					<div className="content">
 						<span className="right floated">
 							<button >
-								<i className="heart outline like icon" onClick={() => this.props.handleCompleteLike(this.props.post)} />
+								<i className="heart outline like icon" onClick={() => this.props.handleLike(this.props.post)} />
 							</button>
 							{this.props.likes}
 						</span>

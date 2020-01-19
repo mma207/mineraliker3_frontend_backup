@@ -57,7 +57,6 @@ export default class MainContainer extends Component {
 
     componentDidMount(){
         this.getPosts()
-        // this.getLikes()
     }
 
     handleChange = (event) => {
@@ -73,49 +72,49 @@ export default class MainContainer extends Component {
     }
 
     handleUpload = (event) => {
-        event.preventDefault()
-        swal("Success", "", "success")
+      event.preventDefault()
+      swal("Success", "", "success")
 
-        let image = this.state.image
-        let uploadTask = storage.ref(`images/${image.name}`).put(image)
-        uploadTask.on('state_changed', 
-            (snapshot) => {
+      let image = this.state.image
+      let uploadTask = storage.ref(`images/${image.name}`).put(image)
+      uploadTask.on('state_changed', 
+          (snapshot) => {
 
-            },
-            (error) => {
+          },
+          (error) => {
 
-            },
-            () => {
-                storage.ref('images').child(image.name).getDownloadURL().then(url => {
-                    this.setState({
-                        img: url
-                    })
-                    fetch(`http://localhost:3000/posts`, {
-                        method:'POST',
-                        headers: { 
-                            'content-type': 'application/json',
-                            'accept': 'application/json'
-                        },
-                        body: JSON.stringify({
-                        img: this.state.img,
-                        caption: this.state.caption,
-                        likes: 0, 
-                        user_id: this.props.loggedInUserId
-                        })
-                    })
-                    .then(r => r.json())
-                    .then(newPost => {
-                        let posts = [...this.state.posts, newPost]
-                        this.setState({
-                            posts: posts
-                        })
-                    })
-                })
-                
-            }
-        )
-        event.target.reset()
-    }
+          },
+          () => {
+              storage.ref('images').child(image.name).getDownloadURL().then(url => {
+                  this.setState({
+                      img: url
+                  })
+                  fetch(`http://localhost:3000/posts`, {
+                      method:'POST',
+                      headers: { 
+                          'content-type': 'application/json',
+                          'accept': 'application/json'
+                      },
+                      body: JSON.stringify({
+                      img: this.state.img,
+                      caption: this.state.caption,
+                      likes: 0, 
+                      user_id: this.props.loggedInUserId
+                      })
+                  })
+                  .then(r => r.json())
+                  .then(newPost => {
+                      let posts = [...this.state.posts, newPost]
+                      this.setState({
+                          posts: posts
+                      })
+                  })
+              })
+
+          }
+      )
+      event.target.reset()
+  }
 
     handleDeletePost = (post) => {
         swal({
@@ -153,77 +152,74 @@ export default class MainContainer extends Component {
       })
     }
 
-    // getLikes = () => {
-    //   fetch(`http://localhost:3000/users/${this.props.loggedInUserId}`)
-    //     .then(r => r.json())
-    //     .then(user => {
-    //       this.setState({
-    //         likes: user.likes
-    //       })
-    //     })
-    // }
+    getLikes = () => {
+      fetch(`http://localhost:3000/users/${this.props.loggedInUserId}`)
+        .then(r => r.json())
+        .then(user => {
+          this.setState({
+            likes: user.likes
+          })
+        })
+    }
 
-    // handleLike = (post) => {
-    //   let userLikes = [...this.state.likes]
-    //   userLikes.filter(like => {
-    //     return like.post_id === post.id ? like.isClicked : !like.isClicked
-    //   })
-
-    // }
-
-    // handlePostLike = (post) => {
-    //   fetch(`http://localhost:3000/likes`, {
-    //     method:'POST',
-    //     headers: { 
-    //       'content-type': 'application/json',
-    //       'accept': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //     user_id: this.props.loggedInUserId,
-    //     post_id: post.id,
-    //     isClicked: true 
-    //     })
-    //   })
-    //   .then(r => r.json())
-    //   .then(newLike => {
-    //     let likes = [...this.state.likes, newLike]
-    //     this.setState({
-    //       likes: likes 
-    //     })
-    //   })
-    // }
+    handlePostLike = (post) => {
+      fetch(`http://localhost:3000/likes`, {
+        method:'POST',
+        headers: { 
+          'content-type': 'application/json',
+          'accept': 'application/json'
+        },
+        body: JSON.stringify({
+        user_id: this.props.loggedInUserId,
+        post_id: post.id,
+        isClicked: true 
+        })
+      })
+      .then(r => r.json())
+      .then(newLike => {
+        let likes = [...this.state.likes, newLike]
+        this.setState({
+          likes: likes 
+        })
+      })
+    }
  
-    // handleLikeCounter = (post) => {
-    //   let postLikes = post.likes + 1
-    //     fetch(`http://localhost:3000/posts/${post.id}`, {
-    //       method:'PATCH',
-    //       headers: { 
-    //         'content-type': 'application/json',
-    //         'accept': 'application/json'
-    //       },
-    //       body: JSON.stringify({
-    //       likes: postLikes 
-    //       })
-    //     })
-    //     .then(r => r.json())
-    //     .then(updateLike => {
-    //       let newPostArray = this.state.posts.map(obj => {
-    //         return obj.id === post.id ? updateLike : obj
-    //       })
-    //       this.setState({
-    //         posts: newPostArray
-    //       })
-    //     })
-    // }
+    handleLikeCounter = (post) => {
+      let postLikes = post.likes + 1
+        fetch(`http://localhost:3000/posts/${post.id}`, {
+          method:'PATCH',
+          headers: { 
+            'content-type': 'application/json',
+            'accept': 'application/json'
+          },
+          body: JSON.stringify({
+          likes: postLikes 
+          })
+        })
+        .then(r => r.json())
+        .then(updateLike => {
+          let newPostArray = this.state.posts.map(obj => {
+            return obj.id === post.id ? updateLike : obj
+          })
+          this.setState({
+            posts: newPostArray
+          })
+        })
+    }
 
-    // handleCompleteLike = (post) => {
-    //   // if (!this.state.currentLike.isClicked){
-    //   this.handleLike(post)
-    //   // this.handleLikeCounter(post)
-    //   // } else {
-    //   //   return 
-    //   // }
-    // }
+    handleCompleteLike = (post) => {
+      this.handlePostLike(post)
+      this.state.likes.map(like => {
+        return like.post_id === post.id && like.isClicked === false ? this.handleLikeCounter(post) : like
+      })
+    }
+
+    handleLike = (post) => {
+      this.getLikes()
+      this.state.likes.map(like => {
+        return like.post_id === post.id ? like : this.handleCompleteLike(post)
+      })
+    }
 
     render() {
         return (
@@ -231,7 +227,7 @@ export default class MainContainer extends Component {
                 <div>
                   <Header />
                   <br></br>
-                  <Route exact path='/' render={(props) => (<Feed handleCompleteLike={this.handleCompleteLike} posts={this.state.posts} />)} /> 
+                  <Route exact path='/' render={(props) => (<Feed handleLike={this.handleLike} posts={this.state.posts} />)} /> 
                   <Route path='/search' component={Search} /> 
                   <Route path='/upload' render={(props) => (<Upload handleChange={this.handleChange} handleCaption={this.handleCaption} handleUpload={this.handleUpload}/>)} /> 
                   <Route path='/notification' component={Notification}/>

@@ -31,7 +31,7 @@ export default class App extends Component {
       })
     }
 
-    setToken = (token, loggedInUserId, loggedInUser) => {
+    setToken = (token, loggedInUserId) => {
       localStorage.token = token;
       localStorage.loggedInUserId = loggedInUserId
 

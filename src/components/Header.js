@@ -7,7 +7,7 @@ export default class Header extends Component {
             <div className="header">
                  <header>
                     <ul>Mineraliker3</ul>
-                    <ul><a href="/message"><i class="paper plane outline icon"></i></a></ul>
+                    <ul><a href="/message"><i className="paper plane outline icon"></i></a></ul>
                 </header>
             </div>
         )
