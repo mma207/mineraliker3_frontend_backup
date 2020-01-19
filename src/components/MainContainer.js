@@ -21,8 +21,7 @@ export default class MainContainer extends Component {
         userPosts: [],
         name: "",
         avatar: "",
-        bio: "",
-        likes: []
+        bio: ""
     }
 
     getPosts = () => {
@@ -151,40 +150,8 @@ export default class MainContainer extends Component {
         }
       })
     }
-
-    getLikes = () => {
-      fetch(`http://localhost:3000/users/${this.props.loggedInUserId}`)
-        .then(r => r.json())
-        .then(user => {
-          this.setState({
-            likes: user.likes
-          })
-        })
-    }
-
-    handlePostLike = (post) => {
-      fetch(`http://localhost:3000/likes`, {
-        method:'POST',
-        headers: { 
-          'content-type': 'application/json',
-          'accept': 'application/json'
-        },
-        body: JSON.stringify({
-        user_id: this.props.loggedInUserId,
-        post_id: post.id,
-        isClicked: true 
-        })
-      })
-      .then(r => r.json())
-      .then(newLike => {
-        let likes = [...this.state.likes, newLike]
-        this.setState({
-          likes: likes 
-        })
-      })
-    }
  
-    handleLikeCounter = (post) => {
+    handleLike = (post) => {
       let postLikes = post.likes + 1
         fetch(`http://localhost:3000/posts/${post.id}`, {
           method:'PATCH',
@@ -205,20 +172,6 @@ export default class MainContainer extends Component {
             posts: newPostArray
           })
         })
-    }
-
-    handleCompleteLike = (post) => {
-      this.handlePostLike(post)
-      this.state.likes.map(like => {
-        return like.post_id === post.id && like.isClicked === false ? this.handleLikeCounter(post) : like
-      })
-    }
-
-    handleLike = (post) => {
-      this.getLikes()
-      this.state.likes.map(like => {
-        return like.post_id === post.id ? like : this.handleCompleteLike(post)
-      })
     }
 
     render() {
