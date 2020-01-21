@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import ConversationsList from './ConversationsList';
 
 export default class Message extends Component {
     render() {
         return (
             <div>
-                <h2>Messages</h2>
+                  <ConversationsList />
             </div>
         )
     }
