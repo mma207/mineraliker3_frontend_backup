@@ -6,10 +6,10 @@ export default class UserMessage extends Component {
         return (
             <div>
                 <div onClick={this.props.handleNewConversation}>
-                    <img src={this.props.user.avatar}/>
+                    <img src={this.props.user.avatar} alt="image not available"/>
                 </div>
                 <div onClick={() => this.props.getTitle(this.props.user.username)}>
-                    <p>{this.props.user.username}</p>
+                    <h1>{this.props.user.username}</h1>
                 </div>
             </div>
         )

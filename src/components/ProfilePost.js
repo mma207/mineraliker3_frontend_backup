@@ -18,7 +18,7 @@ export default class ProfilePost extends Component {
                         <p>{this.props.caption}</p>
                         <p>{this.props.likes} ♥️</p>
                     </div>
-                        <button onClick={this.renderComments}>Read Comments</button>
+                        {/* <button onClick={this.renderComments}>Read Comments</button> */}
                 </div>
             </div>
         )
