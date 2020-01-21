@@ -7,8 +7,13 @@ import Cable from './Cable';
 
 class ConversationsList extends React.Component {
   state = {
+    title: '',
     conversations: [],
     activeConversation: null
+  };
+
+  getTitle = (name) => {
+    this.setState({ title: name });
   };
 
   componentDidMount = () => {
@@ -38,6 +43,18 @@ class ConversationsList extends React.Component {
     this.setState({ conversations });
   };
 
+  handleNewConversation = () => {
+    fetch(`${API_ROOT}/conversations`, {
+      method: 'POST',
+      headers: { 
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    });
+      this.setState({ title: '' });
+  }
+
   render = () => {
     const { conversations, activeConversation } = this.state;
     return (
@@ -54,7 +71,7 @@ class ConversationsList extends React.Component {
         ) : null}
         <h2>Conversations</h2>
         <ul>{mapConversations(conversations, this.handleClick)}</ul>
-        <NewConversationForm />
+        <NewConversationForm handleNewConversation={this.handleNewConversation} getTitle={this.getTitle} conversations={this.state.conversations}/>
         {activeConversation ? (
           <MessagesArea
             conversation={findActiveConversation(

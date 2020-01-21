@@ -1,38 +1,33 @@
 import React from 'react';
 import { API_ROOT, HEADERS } from '../constants';
+import UserMessage from './UserMessage';
 
 class NewConversationForm extends React.Component {
   state = {
-    title: ''
+    users: []
   };
 
-  handleChange = e => {
-    this.setState({ title: e.target.value });
-  };
+  componentDidMount(){
+    fetch(`http://localhost:3000/users`)
+    .then(r => r.json())
+    .then(userArray => {
+        this.setState({
+            users: userArray
+        })
+    })
+  }
 
-  handleSubmit = e => {
-    e.preventDefault()
-    fetch(`${API_ROOT}/conversations`, {
-      method: 'POST',
-      headers: HEADERS,
-      body: JSON.stringify(this.state)
-    });
-    this.setState({ title: '' });
-  };
+  renderUsers = () => {
+    return this.state.users.map(user => 
+      <UserMessage user={user} getTitle={this.props.getTitle} handleNewConversation={this.props.handleNewConversation}/>
+    )
+  }
 
   render = () => {
     return (
       <div className="newConversationForm">
-        <form onSubmit={this.handleSubmit}>
-          <label>New Conversation:</label>
-          <br />
-          <input
-            type="text"
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
-          <input type="submit" />
-        </form>
+        <h1>Available Users:</h1>
+        {this.renderUsers()}
       </div>
     );
   };
