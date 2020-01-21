@@ -12,11 +12,18 @@ export default class Profile extends Component {
     render(){
         return (
             <div>
-                <img src={this.props.avatar} height="100" width="100"/>
+                <h2 class="ui block header">
+                    <img src={this.props.avatar} class="ui circular image"/>
+                    {this.props.name}
+                    <br></br>
+                    <p>{this.props.bio}</p>
+                </h2>
+                <br></br>
+                {/* <img class="ui small circular image" src={this.props.avatar} />
                 <br></br>
                 <h3>{this.props.name}</h3>
                 <p>{this.props.bio}</p>
-                <br></br>
+                <br></br> */}
                 {this.renderUserPosts()}
             </div>
         )

@@ -1,5 +1,5 @@
 .a {
-	font-size: small;
+	font-size: xxx-small;
 }
 
 /*Smartphone image*/
@@ -254,7 +254,6 @@ footer .container
 	footer .container
 	{
 		padding: 0 2rem;
-		justify-content: center;
 	}
 
 	.footer-nav ul

@@ -1,6 +1,8 @@
 import firebase from 'firebase/app'
 import 'firebase/storage'
 
+
+// uploading 
 let apiKey = process.env.REACT_APP_API_KEY_FIREBASE
 var firebaseConfig = {
         apiKey: apiKey,
@@ -19,3 +21,4 @@ const storage = firebase.storage()
 export {
     storage, firebase as default 
 }
+

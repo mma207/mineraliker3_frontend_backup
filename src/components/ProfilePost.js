@@ -3,11 +3,11 @@ import Comment from './Comment'
 
 export default class ProfilePost extends Component {
 
-    // renderComments = () => {
-    //     return this.props.comments.map(comment => 
-    //         <Comment comment={comment}/>
-    //     )
-    // }
+    renderComments = () => {
+        return this.props.comments.map(comment => 
+            <Comment comment={comment}/>
+        )
+    }
 
     render() {
         return (
@@ -18,7 +18,7 @@ export default class ProfilePost extends Component {
                         <p>{this.props.caption}</p>
                         <p>{this.props.likes} ♥️</p>
                     </div>
-                        {/* <button onClick={this.renderComments}>Read Comments</button> */}
+                        <button onClick={this.renderComments}>Read Comments</button>
                 </div>
             </div>
         )

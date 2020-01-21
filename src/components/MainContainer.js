@@ -21,7 +21,8 @@ export default class MainContainer extends Component {
         userPosts: [],
         name: "",
         avatar: "",
-        bio: ""
+        bio: "",
+        username: ""
     }
 
     getPosts = () => {
@@ -48,7 +49,8 @@ export default class MainContainer extends Component {
                   userPosts: user.posts,
                   avatar: user.avatar,
                   bio: user.bio,
-                  name: user.name
+                  name: user.name,
+                  username: user.username
                 })
               })
           }
@@ -98,15 +100,17 @@ export default class MainContainer extends Component {
                       img: this.state.img,
                       caption: this.state.caption,
                       likes: 0, 
-                      user_id: this.props.loggedInUserId
+                      user_id: this.props.loggedInUserId,
+                      // avatar: this.state.avatar,
+                      // username: this.state.username
                       })
                   })
                   .then(r => r.json())
                   .then(newPost => {
-                      let posts = [...this.state.posts, newPost]
-                      this.setState({
-                          posts: posts
-                      })
+                    let posts = [...this.state.posts, newPost]
+                    this.setState({
+                        posts: posts
+                    })
                   })
               })
 
@@ -180,7 +184,7 @@ export default class MainContainer extends Component {
                 <div>
                   <Header />
                   <br></br>
-                  <Route exact path='/' render={(props) => (<Feed handleLike={this.handleLike} posts={this.state.posts} />)} /> 
+                  <Route exact path='/' render={(props) => (<Feed avatar={this.state.avatar} username={this.state.username} handleLike={this.handleLike} posts={this.state.posts} />)} /> 
                   <Route path='/search' component={Search} /> 
                   <Route path='/upload' render={(props) => (<Upload handleChange={this.handleChange} handleCaption={this.handleCaption} handleUpload={this.handleUpload}/>)} /> 
                   <Route path='/notification' component={Notification}/>
@@ -192,3 +196,6 @@ export default class MainContainer extends Component {
         )
     }
 }
+
+
+
