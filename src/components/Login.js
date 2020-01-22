@@ -3,7 +3,6 @@ import { storage } from '../firebase'
 import './login.css'
 import swal from 'sweetalert'
 
-
 export default class Login extends Component {
 
     state = {
@@ -193,7 +192,3 @@ export default class Login extends Component {
     }
     
 }
-    
-
- 
-    

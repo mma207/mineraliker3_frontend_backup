@@ -5,6 +5,7 @@ export default class Notification extends Component {
         return (
             <div>
                 <h1>Notification Center</h1>
+                <p>You have no new notifications.</p>
             </div>
         )
     }

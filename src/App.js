@@ -3,7 +3,6 @@ import './App.css';
 import LogIn from './components/Login'
 import MainContainer from './components/MainContainer';
 
-
 export default class App extends Component {
   
     state = {
@@ -31,7 +30,7 @@ export default class App extends Component {
       })
     }
 
-    setToken = (token, loggedInUserId, loggedInUser) => {
+    setToken = (token, loggedInUserId) => {
       localStorage.token = token;
       localStorage.loggedInUserId = loggedInUserId
 
@@ -53,6 +52,6 @@ export default class App extends Component {
                               token={ this.state.token } />
             : <LogIn setToken={ this.setToken }  />
         }
-      </main>);
+      </main>)
     }
 }

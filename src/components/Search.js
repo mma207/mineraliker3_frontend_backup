@@ -36,8 +36,8 @@ export default class Search extends Component {
     render() {
         return (
             <div>
-                <h1>Search</h1>
-                <form onSubmit={this.searchNews}>
+                <h1 align="center">Search</h1>
+                <form onSubmit={this.searchNews} align="center">
                     <input onChange={this.handleSearch} type="text" placeholder="search"/>
                     <button>Search</button>
                 </form>

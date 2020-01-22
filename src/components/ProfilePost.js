@@ -11,14 +11,14 @@ export default class ProfilePost extends Component {
 
     render() {
         return (
-            <div class="ui three stackable cards">
-                <div class="card">
-                    <div class="image">
+            <div className="ui three stackable cards">
+                <div className="card">
+                    <div className="image">
                         <img src={this.props.img} onClick={() => {this.props.handleDeletePost(this.props.post)}}/>
                         <p>{this.props.caption}</p>
                         <p>{this.props.likes} ♥️</p>
                     </div>
-                        <button onClick={this.renderComments}>Read Comments</button>
+                        {/* <button onClick={this.renderComments}>Read Comments</button> */}
                 </div>
             </div>
         )
