@@ -19,7 +19,7 @@ class NewConversationForm extends React.Component {
 
   renderUsers = () => {
     return this.state.users.map(user => 
-      <UserMessage user={user} getTitle={this.props.getTitle} handleNewConversation={this.props.handleNewConversation}/>
+      <UserMessage user={user} getTitle={this.props.getTitle} />
     )
   }
 

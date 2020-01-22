@@ -4,6 +4,7 @@ import { API_ROOT } from '../constants';
 import NewConversationForm from './NewConversationForm';
 import MessagesArea from './MessagesArea';
 import Cable from './Cable';
+import swal from 'sweetalert'
 
 class ConversationsList extends React.Component {
   state = {
@@ -13,8 +14,22 @@ class ConversationsList extends React.Component {
   };
 
   getTitle = (name) => {
-    this.setState({ title: name });
-  };
+    this.setState({ title: name })
+    swal({
+      title: "Click to Continue",
+      buttons: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Click on the Conversation Title Above to Get Started", {
+          icon: "success",
+        });
+        this.handleNewConversation()
+      } else {
+        swal("Conversation Was Not Generated");
+      }
+    });
+  }
 
   componentDidMount = () => {
     fetch(`${API_ROOT}/conversations`)
@@ -71,16 +86,16 @@ class ConversationsList extends React.Component {
         ) : null}
         <h2>Conversations</h2>
         <ul>{mapConversations(conversations, this.handleClick)}</ul>
-        <NewConversationForm handleNewConversation={this.handleNewConversation} getTitle={this.getTitle} conversations={this.state.conversations}/>
+        <NewConversationForm getTitle={this.getTitle} conversations={this.state.conversations}/>
         {activeConversation ? (
           <MessagesArea
           loggedInUserId={this.props.loggedInUserId}
-            conversation={findActiveConversation(
-              conversations,
-              activeConversation
+          conversation={findActiveConversation(
+            conversations,
+            activeConversation
             )}
-          />
-        ) : null}
+            />
+            ) : null}
       </div>
     );
   };

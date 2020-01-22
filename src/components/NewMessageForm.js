@@ -1,6 +1,5 @@
 import React from 'react';
 import { API_ROOT, HEADERS } from '../constants';
-import './newmessageform.css'
 
 class NewMessageForm extends React.Component {
   state = {
@@ -32,13 +31,13 @@ class NewMessageForm extends React.Component {
     return (
       <div className="newMessageForm">
         <form onSubmit={this.handleSubmit}>
-          <label>New Message:</label>
           <br />
           <input
           className=""
             type="text"
             value={this.state.text}
             onChange={this.handleChange}
+            placeholder="New Message..."
           />
           <input type="submit" />
         </form>

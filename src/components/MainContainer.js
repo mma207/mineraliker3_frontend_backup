@@ -10,7 +10,7 @@ import { storage } from '../firebase'
 import swal from 'sweetalert'
 import Feed from './Feed'
 import Header from './Header'
-
+import MessageArea from './MessagesArea'
 export default class MainContainer extends Component {
 
     state = {
