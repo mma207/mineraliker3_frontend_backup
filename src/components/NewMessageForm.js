@@ -1,10 +1,12 @@
 import React from 'react';
 import { API_ROOT, HEADERS } from '../constants';
+import './newmessageform.css'
 
 class NewMessageForm extends React.Component {
   state = {
     text: '',
-    conversation_id: this.props.conversation_id
+    conversation_id: this.props.conversation_id,
+    user_id: this.props.loggedInUserId
   };
 
   componentWillReceiveProps = nextProps => {
@@ -33,6 +35,7 @@ class NewMessageForm extends React.Component {
           <label>New Message:</label>
           <br />
           <input
+          className=""
             type="text"
             value={this.state.text}
             onChange={this.handleChange}
@@ -45,3 +48,4 @@ class NewMessageForm extends React.Component {
 }
 
 export default NewMessageForm;
+

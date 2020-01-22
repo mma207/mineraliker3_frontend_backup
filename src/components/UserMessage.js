@@ -4,14 +4,19 @@ export default class UserMessage extends Component {
 
     render() {
         return (
-            <div>
-                <div onClick={this.props.handleNewConversation}>
-                    <img src={this.props.user.avatar} alt="image not available"/>
-                </div>
-                <div onClick={() => this.props.getTitle(this.props.user.username)}>
-                    <h1>{this.props.user.username}</h1>
+            <div role="list" class="ui list">
+                <div role="listitem" class="item">
+                    <img src={this.props.user.avatar} class="ui avatar image" onClick={this.props.handleNewConversation}/>
+                    <div class="content" onClick={() => this.props.getTitle(this.props.user.username)}>
+                        <a class="header">{this.props.user.username}</a>
+                    </div>
                 </div>
             </div>
         )
     }
 }
+
+
+
+
+    

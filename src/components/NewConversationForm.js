@@ -26,7 +26,7 @@ class NewConversationForm extends React.Component {
   render = () => {
     return (
       <div className="newConversationForm">
-        <h1>Available Users:</h1>
+        <h1>Available Users</h1>
         {this.renderUsers()}
       </div>
     );

@@ -5,7 +5,7 @@ export default class Message extends Component {
     render() {
         return (
             <div>
-                  <ConversationsList />
+                  <ConversationsList loggedInUserId={this.props.loggedInUserId}/>
             </div>
         )
     }

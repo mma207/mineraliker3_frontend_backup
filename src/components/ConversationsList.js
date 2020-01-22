@@ -74,6 +74,7 @@ class ConversationsList extends React.Component {
         <NewConversationForm handleNewConversation={this.handleNewConversation} getTitle={this.getTitle} conversations={this.state.conversations}/>
         {activeConversation ? (
           <MessagesArea
+          loggedInUserId={this.props.loggedInUserId}
             conversation={findActiveConversation(
               conversations,
               activeConversation
@@ -98,9 +99,12 @@ const findActiveConversation = (conversations, activeConversation) => {
 const mapConversations = (conversations, handleClick) => {
   return conversations.map(conversation => {
     return (
-      <li key={conversation.id} onClick={() => handleClick(conversation.id)}>
-        {conversation.title}
-      </li>
+      <div role="list" class="ui selection middle aligned list">
+        <div role="listitem" class="item">
+          <div class="content"><div class="header" key={conversation.id} onClick={() => handleClick(conversation.id)}>{conversation.title}</div></div>
+        </div>
+      </div>
     );
   });
 };
+
